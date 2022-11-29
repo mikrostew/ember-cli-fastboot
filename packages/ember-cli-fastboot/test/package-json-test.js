@@ -26,6 +26,8 @@ describe('generating package.json', function () {
           customApp.editPackageJSON((pkg) => {
             delete pkg.devDependencies['ember-fetch'];
             delete pkg.devDependencies['ember-welcome-page'];
+            // needed because @ember-data/store does `FastBoot.require('crypto')`
+            pkg.fastbootDependencies = ['crypto'];
           });
           return customApp.run('npm', 'install');
         })
